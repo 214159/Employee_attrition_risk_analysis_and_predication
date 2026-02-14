@@ -1,1 +1,67 @@
-🚀 Employee Attrition Risk Analysis & PredictionEmployee attrition is a significant challenge for Indian organizations, leading to increased recruitment costs, productivity losses, and the departure of experienced talent. This project uses machine learning to predict employee attrition based on key factors like age, salary, and satisfaction level.📊 Dataset InsightsThe analysis is based on a dataset of 1,470 records with 35 unique features.Key Statistics:Average Age: 36.9 years.Average Monthly Income: ₹5,46,168 (approx. converted from 6,502 units).Average Total Experience: 11.3 years.Overall Attrition Rate: 16.1%.Critical Observations:Demographics: The majority of employees fall within the 30–40 year age bracket.Income Trends: There is a clear trend where monthly income increases alongside professional experience.Market Context: Attrition remains a moderate but significant factor for the organization.⚙️ Project WorkflowData Understanding: Analyzing features such as Age, OverTime, JobRole, and MonthlyIncome.Preprocessing: Implementing LabelEncoder for categorical variables and StandardScaler for feature scaling.Model Selection: Training multiple classifiers, including Logistic Regression, Random Forest, and XGBoost.🏆 Model PerformanceBecause the dataset is imbalanced (Class 0 is the majority), the focus is on Recall and F1-Score for identifying employees at risk (Class 1).ModelPrecision (Class 1)Recall (Class 1)F1-ScoreXGBoost0.500.410.46Logistic Regression0.500.360.42Random Forest1.000.130.23Key Takeaways:Top Performer: XGBoost is the best choice, providing a superior balance for detecting the minority class.Limitations: Accuracy is not a reliable metric here as it is dominated by the majority class.Random Forest: While precise (1.0), it had a very low recall (0.13), failing to detect most employees likely to leave.🛠️ Tech StackLanguage: PythonLibraries:Data Handling: Pandas, NumPyVisualization: Matplotlib, SeabornMachine Learning: Scikit-learn, XGBoost💡 RecommendationsTo enhance prediction accuracy for Indian workforce dynamics, future iterations could include:Addressing Imbalance: Using SMOTE (oversampling) or undersampling to better represent attrition cases.Threshold Tuning: Adjusting classification thresholds to prioritize higher Recall for high-risk employees.
+# 🚀 Employee Attrition Risk Analysis & Prediction
+
+Employee attrition is a critical challenge for Indian organizations. High turnover leads to increased recruitment costs, productivity losses, and the departure of experienced talent. This project leverages Machine Learning to identify high-risk employees early, enabling data-driven retention strategies.
+
+---
+
+## 📊 Dataset Insights
+The analysis is based on a dataset of **1,470 records** with **35 unique features**. 
+
+### **Key Statistics:**
+* **Average Age**: 36.9 years
+* **Average Monthly Income**: ₹5,46,168 (approx. converted to INR)
+* **Average Experience**: 11.3 total working years
+* **Attrition Rate**: 16.1% (Market standard for mid-sized firms)
+
+### **Critical Observations:**
+* **Demographics**: Most employees are between **30–40 years** old.
+* **Income Correlation**: Monthly income shows a strong positive correlation with professional experience.
+* **Class Imbalance**: The dataset is imbalanced, with the majority of employees staying (Class 0), requiring specific evaluation metrics beyond simple accuracy.
+
+---
+
+## ⚙️ Project Workflow
+1.  **Data Exploration**: Analyzing features like `Age`, `OverTime`, `JobRole`, and `MonthlyIncome`.
+2.  **Preprocessing**: Implementing `LabelEncoder` for categorical variables and `StandardScaler` for feature scaling.
+3.  **Model Selection**: Training and evaluating multiple classifiers to detect the minority class (employees leaving).
+
+
+
+[Image of machine learning model training workflow]
+
+
+---
+
+## 🏆 Model Performance
+Given the class imbalance, the models were evaluated primarily on **Recall** and **F1-Score** for Class 1 (Attrition).
+
+| Model | Precision (Class 1) | Recall (Class 1) | F1-Score |
+| :--- | :---: | :---: | :---: |
+| **XGBoost** | **0.50** | **0.41** | **0.46** |
+| **Logistic Regression** | 0.50 | 0.36 | 0.42 |
+| **Random Forest** | 1.00 | 0.13 | 0.23 |
+
+### **Key Findings:**
+* **XGBoost** emerged as the top performer, offering the best balance for detecting the minority class.
+* **Random Forest** achieved perfect precision (1.00) but failed on recall (0.13), meaning it missed 87% of employees who actually left.
+* **Metric Focus**: Accuracy is ignored as a success metric here because the "Stayed" class dominates the data.
+
+---
+
+## 🛠️ Tech Stack
+* **Language**: Python 🐍
+* **Data Handling**: `Pandas`, `NumPy`
+* **Visualization**: `Matplotlib`, `Seaborn`
+* **Machine Learning**: `Scikit-learn`, `XGBoost`,'Logistic Learning','Random Forest"
+
+---
+
+## 💡 Recommendations & Future Scope
+To further improve performance in the Indian corporate context:
+1.  **SMOTE (Oversampling)**: Use synthetic data generation to balance the attrition classes.
+2.  **Threshold Tuning**: Lower the classification threshold to prioritize **Recall** (catching more potential leavers).
+3.  **Feature Engineering**: Include factors like "Distance from Home" and "Years Since Last Promotion" which are high-impact variables in Indian urban employment.
+
+---
+
+
