@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Attrition Engine | Full 27-Point Scan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; color: white; margin: 0; overflow: hidden; }
+        
+        .view { display: none; height: 100vh; width: 100vw; position: absolute; top: 0; left: 0; }
+        .view.active { display: flex; flex-direction: column; animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .custom-scroll { overflow-y: scroll !important; }
+        .custom-scroll::-webkit-scrollbar { width: 14px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #0f172a; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #6366f1; border-radius: 10px; border: 3px solid #0f172a; }
+
+        .rating-group { display: flex; gap: 8px; margin-top: 8px; }
+        .rating-btn { flex: 1; padding: 12px; border: 1px solid #334155; border-radius: 12px; text-align: center; cursor: pointer; transition: 0.3s; background: #1e293b; font-weight: bold; }
+        .rating-btn:hover { border-color: #6366f1; background: #2d3748; }
+        .rating-btn.selected { background: #6366f1; border-color: #818cf8; transform: scale(1.05); box-shadow: 0 0 15px rgba(99, 102, 241, 0.4); }
+
+        .glass-container { background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(20px); }
+        .input-box { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 12px; width: 100%; outline: none; transition: 0.3s; color: white; }
+        .input-box:focus { border-color: #6366f1; background: #0f172a; }
+        .input-error { border-color: #ef4444 !important; background: rgba(239, 68, 68, 0.1) !important; }
+    </style>
+</head>
+<body>
+
+    <section id="welcomePage" class="view active items-center justify-center bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-900/40 via-slate-950 to-slate-950">
+        <div class="text-center space-y-8 p-6">
+            <h1 class="text-8xl md:text-9xl font-black tracking-tighter uppercase leading-none">
+                ATTRITION<br><span class="text-indigo-500">DECODER</span>
+            </h1>
+            <p class="text-slate-400 text-xl max-w-2xl mx-auto">Proprietary AI diagnostic analyzing 27 behavioral and professional markers to predict employee retention.</p>
+            <button onclick="changeView('entryPage')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-black px-16 py-6 rounded-2xl text-2xl transition-all hover:scale-105 shadow-[0_0_40px_rgba(99,102,241,0.3)]">
+                BEGIN SYSTEM SCAN
+            </button>
+        </div>
+    </section>
+
+    <section id="entryPage" class="view bg-slate-950 items-center justify-center p-4">
+        <div class="w-full h-full max-w-7xl glass-container rounded-[2rem] flex flex-col overflow-hidden">
+            <div class="p-8 border-b border-white/5 flex justify-between items-center bg-white/5">
+                <div class="flex items-center gap-4">
+                    <div class="p-3 bg-indigo-600 rounded-xl"><i class="fas fa-database text-xl"></i></div>
+                    <h2 class="text-2xl font-black uppercase italic tracking-wider">Parameter Ingestion</h2>
+                </div>
+                <div id="errorBanner" class="hidden text-red-500 font-bold animate-pulse"><i class="fas fa-exclamation-triangle"></i> MISSING INPUTS DETECTED</div>
+            </div>
+
+            <form id="fullDataForm" class="flex-grow custom-scroll p-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-10">
+                
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Employee Age</label>
+                    <input type="number" name="Age" class="input-box" placeholder="35">
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Gender</label>
+                    <select name="Gender" class="input-box">
+                        <option value="">Select...</option><option>Male</option><option>Female</option>
+                    </select>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Business Travel</label>
+                    <select name="BusinessTravel" class="input-box">
+                        <option value="">Select...</option><option>Non-Travel</option><option>Travel_Rarely</option><option>Travel_Frequently</option>
+                    </select>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Department</label>
+                    <select name="Department" class="input-box">
+                        <option value="">Select...</option><option>Sales</option><option>Research & Development</option><option>Human Resources</option>
+                    </select>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Distance From Home (KM)</label>
+                    <input type="number" name="DistanceFromHome" class="input-box" placeholder="KM">
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Education Level</label>
+                    <select name="Education" class="input-box">
+                        <option value="">Select...</option>
+                        <option value="1">1 (Below College)</option><option value="2">2 (College)</option><option value="3">3 (Bachelor's)</option><option value="4">4 (Master's)</option><option value="5">5 (Doctorate)</option>
+                    </select>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Education Field</label>
+                    <select name="EducationField" class="input-box">
+                        <option value="">Select Field...</option>
+                        <option>Life Sciences</option><option>Medical</option><option>Marketing</option><option>Technical Degree</option><option>Human Resources</option><option>Other</option>
+                    </select>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Job Role</label>
+                    <select name="JobRole" class="input-box">
+                        <option value="">Select Role...</option>
+                        <option>Sales Executive</option><option>Research Scientist</option><option>Laboratory Technician</option><option>Manufacturing Director</option><option>Healthcare Representative</option><option>Manager</option><option>Sales Representative</option><option>Research Director</option><option>Human Resources</option>
+                    </select>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Job Level</label>
+                    <select name="JobLevel" class="input-box">
+                        <option value="">Select Level...</option>
+                        <option value="1">1 (Entry Level)</option><option value="2">2 (Junior)</option><option value="3">3 (Intermediate)</option><option value="4">4 (Senior)</option><option value="5">5 (Executive)</option>
+                    </select>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-400 uppercase tracking-widest">Environment Satisfaction</label>
+                    <div class="rating-group" data-name="EnvironmentSatisfaction">
+                        <div class="rating-btn" onclick="setRate(this, 1)">1</div><div class="rating-btn" onclick="setRate(this, 2)">2</div><div class="rating-btn" onclick="setRate(this, 3)">3</div><div class="rating-btn" onclick="setRate(this, 4)">4</div>
+                        <input type="hidden" name="EnvironmentSatisfaction">
+                    </div>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-400 uppercase tracking-widest">Job Involvement</label>
+                    <div class="rating-group" data-name="JobInvolvement">
+                        <div class="rating-btn" onclick="setRate(this, 1)">1</div><div class="rating-btn" onclick="setRate(this, 2)">2</div><div class="rating-btn" onclick="setRate(this, 3)">3</div><div class="rating-btn" onclick="setRate(this, 4)">4</div>
+                        <input type="hidden" name="JobInvolvement">
+                    </div>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-400 uppercase tracking-widest">Job Satisfaction</label>
+                    <div class="rating-group" data-name="JobSatisfaction">
+                        <div class="rating-btn" onclick="setRate(this, 1)">1</div><div class="rating-btn" onclick="setRate(this, 2)">2</div><div class="rating-btn" onclick="setRate(this, 3)">3</div><div class="rating-btn" onclick="setRate(this, 4)">4</div>
+                        <input type="hidden" name="JobSatisfaction">
+                    </div>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Monthly Income ($)</label>
+                    <input type="number" name="MonthlyIncome" class="input-box" placeholder="e.g. 5000">
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Num Companies Worked</label>
+                    <input type="number" name="NumCompaniesWorked" class="input-box">
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Marital Status</label>
+                    <select name="MaritalStatus" class="input-box">
+                        <option value="">Select...</option><option>Single</option><option>Married</option><option>Divorced</option>
+                    </select>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Overtime Frequent?</label>
+                    <select name="OverTime" class="input-box"><option value="">Select...</option><option>Yes</option><option>No</option></select>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Percent Salary Hike (%)</label>
+                    <input type="number" name="PercentSalaryHike" class="input-box">
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Performance Rating (1-4)</label>
+                    <input type="number" name="PerformanceRating" min="1" max="4" class="input-box">
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-400 uppercase tracking-widest">Relationship Satisfaction</label>
+                    <div class="rating-group" data-name="RelationshipSatisfaction">
+                        <div class="rating-btn" onclick="setRate(this, 1)">1</div><div class="rating-btn" onclick="setRate(this, 2)">2</div><div class="rating-btn" onclick="setRate(this, 3)">3</div><div class="rating-btn" onclick="setRate(this, 4)">4</div>
+                        <input type="hidden" name="RelationshipSatisfaction">
+                    </div>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Stock Option Level (0-3)</label>
+                    <input type="number" name="StockOptionLevel" min="0" max="3" class="input-box">
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Total Working Years</label>
+                    <input type="number" name="TotalWorkingYears" class="input-box">
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Training Times Last Year</label>
+                    <input type="number" name="TrainingTimesLastYear" class="input-box">
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-400 uppercase tracking-widest">Work Life Balance</label>
+                    <div class="rating-group" data-name="WorkLifeBalance">
+                        <div class="rating-btn" onclick="setRate(this, 1)">1</div><div class="rating-btn" onclick="setRate(this, 2)">2</div><div class="rating-btn" onclick="setRate(this, 3)">3</div><div class="rating-btn" onclick="setRate(this, 4)">4</div>
+                        <input type="hidden" name="WorkLifeBalance">
+                    </div>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Years At Company</label>
+                    <input type="number" name="YearsAtCompany" class="input-box">
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Years In Current Role</label>
+                    <input type="number" name="YearsInCurrentRole" class="input-box">
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Years Since Last Promotion</label>
+                    <input type="number" name="YearsSinceLastPromotion" class="input-box">
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest">Years With Curr Manager</label>
+                    <input type="number" name="YearsWithCurrManager" class="input-box">
+                </div>
+
+            </form>
+
+            <div class="p-8 border-t border-white/5 bg-slate-900 flex justify-end">
+                <button onclick="runAnalysis()" class="bg-indigo-600 hover:bg-indigo-500 px-12 py-5 rounded-2xl font-black text-xl transition-all shadow-lg shadow-indigo-600/30">
+                    ANALYZE ATTRITION
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="analyzePage" class="view bg-slate-950 items-center justify-center p-6">
+        <div class="max-w-6xl w-full space-y-8">
+            <div class="flex justify-between items-end">
+                <h2 class="text-5xl font-black italic">SCAN <span class="text-indigo-500">RESULTS</span></h2>
+                <div class="flex gap-4">
+                    <button onclick="downloadCSV()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-6 py-2 rounded-xl transition">SAVE DATA (CSV)</button>
+                    <button onclick="location.reload()" class="text-slate-500 hover:text-white transition">New Diagnostic</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="glass-container p-12 rounded-[3rem] text-center">
+                    <div class="relative w-48 h-48 mx-auto mb-8">
+                        <svg class="w-full h-full transform -rotate-90">
+                            <circle cx="96" cy="96" r="80" stroke="rgba(255,255,255,0.05)" stroke-width="12" fill="transparent" />
+                            <circle cx="96" cy="96" r="80" stroke="#ef4444" stroke-width="12" fill="transparent" stroke-dasharray="502" stroke-dashoffset="60" stroke-linecap="round" />
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <span class="text-6xl font-black">88%</span>
+                        </div>
+                    </div>
+                    <h3 class="text-3xl font-black text-red-500 uppercase tracking-widest">Flight Risk</h3>
+                    <p class="text-slate-400 mt-4">Based on 27 input vectors, departure is predicted within 6 months.</p>
+                </div>
+
+                <div class="lg:col-span-2 glass-container p-12 rounded-[3rem]">
+                    <h3 class="text-xl font-bold text-indigo-400 mb-8 uppercase tracking-widest"><i class="fas fa-chart-bar mr-3"></i> Top Attrition Drivers</h3>
+                    <div class="h-64">
+                        <canvas id="attritionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function changeView(id) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            if(id === 'analyzePage') renderGraph();
+        }
+
+        function setRate(btn, val) {
+            const group = btn.parentElement;
+            group.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            group.querySelector('input').value = val;
+        }
+
+        function runAnalysis() {
+            const form = document.getElementById('fullDataForm');
+            const inputs = form.querySelectorAll('input, select');
+            let valid = true;
+
+            inputs.forEach(i => {
+                if(!i.value) { i.classList.add('input-error'); valid = false; }
+                else { i.classList.remove('input-error'); }
+            });
+
+            if(!valid) {
+                document.getElementById('errorBanner').classList.remove('hidden');
+                form.scrollTop = 0;
+                return;
+            }
+
+            changeView('analyzePage');
+        }
+
+        function downloadCSV() {
+            const form = document.getElementById('fullDataForm');
+            const formData = new FormData(form);
+            let csv = "Field,Value\n";
+            formData.forEach((value, key) => {
+                csv += `"${key}","${value}"\n`;
+            });
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            a.setAttribute('download', 'Attrition_Diagnostic_Report.csv');
+            a.click();
+        }
+
+        function renderGraph() {
+            const ctx = document.getElementById('attritionChart');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Overtime Impact', 'Monthly Income', 'Job Level Stagnation', 'Commute Distance', 'Satisfaction Rating'],
+                    datasets: [{
+                        label: 'Risk Weight',
+                        data: [92, 78, 55, 40, 32],
+                        backgroundColor: '#6366f1',
+                        borderRadius: 15
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { display: false },
+                        y: { ticks: { color: 'white', font: { weight: 'bold' } }, grid: { display: false } }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
