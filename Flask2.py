@@ -23,7 +23,7 @@ except Exception as e:
 # --- 2. SERVE THE UI ---
 @app.route('/')
 def home():
-    return render_template('temp.html')
+    return render_template('index.html')
 
 # --- 3. PREDICTION LOGIC ---
 @app.route('/predict', methods=['POST'])
@@ -72,4 +72,5 @@ def predict():
 
 if __name__ == '__main__':
     # host='0.0.0.0' makes it accessible even if 127.0.0.1 is blocked
+
     app.run(host='0.0.0.0', port=5000, debug=True)
