@@ -1,67 +1,63 @@
-# 🚀 Employee Attrition Risk Analysis & Prediction
+# 🚀 AI Employee Attrition Predictor
 
-Employee attrition is a critical challenge for Indian organizations. High turnover leads to increased recruitment costs, productivity losses, and the departure of experienced talent. This project leverages Machine Learning to identify high-risk employees early, enabling data-driven retention strategies.
+[![Render Deployment](https://img.shields.io/badge/Render-Live_Demo-00d1b2?style=for-the-badge&logo=render&logoColor=white)](https://employee-xcjt.onrender.com/)
+[![Hugging Face Space](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Space-blue?style=for-the-badge)](https://huggingface.co/spaces/PayalGaikwad/Employee_Risk_Analysis)
+
+An interactive Machine Learning web application designed to identify high-risk employees using **27 key behavioral and professional markers.**
+
+---
+
+## 🌐 Live Deployments
+* **Primary (Render):** [https://employee-xcjt.onrender.com/](https://employee-xcjt.onrender.com/)
+* **Mirror (Hugging Face):** [Employee Attrition Risk Analysis](https://huggingface.co/spaces/PayalGaikwad/Employee_Risk_Analysis)
 
 ---
 
 ## 📊 Dataset Insights
-The analysis is based on a dataset of **1,470 records** with **35 unique features**. 
+The engine is trained on a dataset of **1,470 records** with an **Attrition Rate of 16.1%**.
 
-### **Key Statistics:**
-* **Average Age**: 36.9 years
-* **Average Monthly Income**: ₹5,46,168 (approx. converted to INR)
-* **Average Experience**: 11.3 total working years
-* **Attrition Rate**: 16.1% (Market standard for mid-sized firms)
-
-### **Critical Observations:**
-* **Demographics**: Most employees are between **30–40 years** old.
-* **Income Correlation**: Monthly income shows a strong positive correlation with professional experience.
-* **Class Imbalance**: The dataset is imbalanced, with the majority of employees staying (Class 0), requiring specific evaluation metrics beyond simple accuracy.
+### **Critical Markers Analyzed:**
+* **Work-Life Balance**: OverTime and DistanceFromHome.
+* **Economic Factors**: MonthlyIncome and PercentSalaryHike.
+* **Loyalty Metrics**: YearsAtCompany and YearsWithCurrManager.
 
 ---
 
-## ⚙️ Project Workflow
-1.  **Data Exploration**: Analyzing features like `Age`, `OverTime`, `JobRole`, and `MonthlyIncome`.
-2.  **Preprocessing**: Implementing `LabelEncoder` for categorical variables and `StandardScaler` for feature scaling.
-3.  **Model Selection**: Training and evaluating multiple classifiers to detect the minority class (employees leaving).
+## ⚙️ Technical Implementation
+The system ensures high accuracy by strictly managing data types and feature alignment:
 
+1. **Input Handling**: The frontend captures 27 features. 
+2. **Type Casting**: The backend automatically converts string-based numeric inputs (often received as `object` types) into `int64` to prevent model runtime errors.
+3. **Encoding Pipeline**: 
+    * Binary Mapping for `Gender` and `OverTime`.
+    * One-Hot Encoding for categorical fields like `JobRole` and `Department`.
 
-
-[Image of machine learning model training workflow]
 
 
 ---
 
 ## 🏆 Model Performance
-Given the class imbalance, the models were evaluated primarily on **Recall** and **F1-Score** for Class 1 (Attrition).
+We prioritize **Recall** to ensure that employees likely to leave are not missed by the system.
 
-| Model | Precision (Class 1) | Recall (Class 1) | F1-Score |
+| Model | Precision (Attrition) | Recall (Attrition) | F1-Score |
 | :--- | :---: | :---: | :---: |
 | **XGBoost** | **0.50** | **0.41** | **0.46** |
 | **Logistic Regression** | 0.50 | 0.36 | 0.42 |
 | **Random Forest** | 1.00 | 0.13 | 0.23 |
 
-### **Key Findings:**
-* **XGBoost** emerged as the top performer, offering the best balance for detecting the minority class.
-* **Random Forest** achieved perfect precision (1.00) but failed on recall (0.13), meaning it missed 87% of employees who actually left.
-* **Metric Focus**: Accuracy is ignored as a success metric here because the "Stayed" class dominates the data.
-
---
+---
 
 ## 🛠️ Tech Stack
-* **Language**: Python 🐍
-* **Data Handling**: `Pandas`, `NumPy`
-* **Visualization**: `Matplotlib`, `Seaborn`
-* **Machine Learning**: `Scikit-learn`, `XGBoost`,`Logistic Regression`, `Random Forest`
+* **Backend**: Python (Flask, Gunicorn)
+* **Frontend**: HTML5, Tailwind CSS, Chart.js
+* **ML Library**: Scikit-learn, XGBoost, Pandas
+* **Hosting**: Render & Hugging Face Spaces
 
 ---
 
-## 💡 Recommendations & Future Scope
-To further improve performance in the Indian corporate context:
-1.  **SMOTE (Oversampling)**: Use synthetic data generation to balance the attrition classes.
-2.  **Threshold Tuning**: Lower the classification threshold to prioritize **Recall** (catching more potential leavers).
-3.  **Feature Engineering**: Include factors like "Distance from Home" and "Years Since Last Promotion" which are high-impact variables in Indian urban employment.
+## 💡 Recommendations
+* **Threshold Tuning**: Managers can adjust the risk threshold to be more sensitive to high-value talent.
+* **Intervention**: High-risk scores (e.g., >70%) should trigger immediate engagement interviews or salary reviews.
 
 ---
-
-
+**Developed by Payal Gaikwad**
