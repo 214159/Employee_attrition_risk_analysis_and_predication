@@ -31,20 +31,34 @@ def predict():
     try:
         raw_input = request.get_json()
         
-        # Ensure we have a default for every single feature the model expects
-        # (Based on your dataset features: Age, DailyRate, JobSatisfaction, etc.)
+        # Create DataFrame from raw JSON input
         user_df = pd.DataFrame([raw_input])
 
+        # --- FIX DATA TYPES (Convert 'object' to 'int') ---
+        # This prevents the error you saw in your screenshots
+        cols_to_fix = [
+            'Age', 'DistanceFromHome', 'Education', 'EnvironmentSatisfaction', 
+            'JobInvolvement', 'JobLevel', 'JobSatisfaction', 'MonthlyIncome', 
+            'NumCompaniesWorked', 'PercentSalaryHike', 'PerformanceRating', 
+            'RelationshipSatisfaction', 'StockOptionLevel', 'TotalWorkingYears', 
+            'TrainingTimesLastYear', 'WorkLifeBalance', 'YearsAtCompany', 
+            'YearsInCurrentRole', 'YearsSinceLastPromotion', 'YearsWithCurrManager'
+        ]
+        
+        for col in cols_to_fix:
+            if col in user_df.columns:
+                user_df[col] = pd.to_numeric(user_df[col], errors='coerce').fillna(0).astype(int)
+
         # Mirroring your Jupyter encoding
-        user_df['Gender_encoded'] = user_df['Gender'].map({'Male': 1, 'Female': 0})
-        user_df['OverTime_encoded'] = user_df['OverTime'].map({'Yes': 1, 'No': 0})
-        user_df['BusinessTravel_encoded'] = user_df['BusinessTravel'].map({
+        user_df['Gender'] = user_df['Gender'].map({'Male': 1, 'Female': 0})
+        user_df['OverTime'] = user_df['OverTime'].map({'Yes': 1, 'No': 0})
+        user_df['BusinessTravel'] = user_df['BusinessTravel'].map({
              'Travel_Rarely': 1, 'Travel_Frequently': 0, 'Non-Travel': 2
         })
 
         cat_cols = ['Department', 'EducationField', 'JobRole', 'MaritalStatus']
         
-        # Transform categorical columns
+        # Transform categorical columns using your loaded OneHotEncoder
         ohe_features = OneHot_model.transform(user_df[cat_cols])
         if hasattr(ohe_features, "toarray"):
             ohe_features = ohe_features.toarray()
@@ -52,25 +66,25 @@ def predict():
         ohe_df = pd.DataFrame(ohe_features, columns=OneHot_model.get_feature_names_out(cat_cols))
 
         # Drop original text columns
-        user_numeric = user_df.drop(columns=cat_cols + ['Gender', 'OverTime', 'BusinessTravel'])
+        user_numeric = user_df.drop(columns=cat_cols)
         user_final = pd.concat([user_numeric, ohe_df], axis=1)
 
-        # Align columns with the EXACT order from training
+        # Align columns with the EXACT order from training (Your 27 columns)
         user_final = user_final.reindex(columns=loaded_model.feature_names_in_, fill_value=0)
 
-        prediction = loaded_model.predict(user_final)[0]
+        # Run Prediction
         probability = loaded_model.predict_proba(user_final)[0][1]
+        risk_score = round(float(probability) * 100, 2)
 
         return jsonify({
-            "prediction": "High Risk" if int(prediction) == 1 else "Low Risk",
-            "risk_percentage": f"{round(float(probability) * 100, 2)}%",
-            "status": "Success"
+            "status": "Success",
+            "risk_percentage": risk_score,
+            "prediction": "High Risk" if risk_score > 50 else "Low Risk"
         })
 
     except Exception as e:
         return jsonify({"error": str(e), "status": "Failed"}), 500
 
 if __name__ == '__main__':
-    # host='0.0.0.0' makes it accessible even if 127.0.0.1 is blocked
-
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    # Port 7860 is required for Hugging Face Spaces
+    app.run(host='0.0.0.0', port=7860, debug=True)
