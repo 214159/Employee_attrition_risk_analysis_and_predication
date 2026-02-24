@@ -1,4 +1,4 @@
-# 🚀 AI Attrition Predictor!
+# 🚀 Employee_Attrition_Risk_Analysis_&_Prediction
 
 [![Render Deployment](https://img.shields.io/badge/Render-Live_Demo-00d1b2?style=for-the-badge&logo=render&logoColor=white)](https://employee-xcjt.onrender.com/https://employee-attrition-risk-analysis-and-lyd4.onrender.com)
 [![Hugging Face Space](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Space-blue?style=for-the-badge)](https://huggingface.co/spaces/PayalGaikwad/Employee_Risk_Analysis)
