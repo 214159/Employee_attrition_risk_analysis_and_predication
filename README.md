@@ -13,6 +13,26 @@ An interactive Machine Learning web application designed to identify high-risk e
 *The high-tech interface features a glassmorphism design with real-time risk calculation.*
 
 ---
+## 🎯 Problem Statement
+Employee attrition is a major challenge for modern organizations. High turnover rates lead to:
+* 💸 **Increased Recruitment Costs**: Replacing a mid-level employee can cost up to 150% of their annual salary.
+* 📉 **Productivity Loss**: New hires take months to reach peak efficiency.
+* 🧠 **Knowledge Drain**: Loss of experienced talent and institutional memory.
+
+**The Objective:** To build a predictive engine that identifies high-risk employees *before* they resign, allowing HR to take preventive actions such as salary reviews, role changes, or stay-interviews.
+
+---
+
+## 📊 Dataset & Insights
+The model is trained on the **IBM HR Analytics Attrition Dataset**, consisting of **1,470 records** across **35 features** (refined to 27 for production).
+
+### **Key Data Insights (EDA):**
+* **The Overtime Trigger**: Employees working Overtime are **3x more likely** to leave.
+* **The Salary Gap**: Most attrited employees fall within the lower monthly income brackets (<$5,000).
+* **The "Magic" Tenure Mark**: Attrition is highest among employees who have been with the company for **less than 2 years** or have had the **same manager** for a long period without promotion.
+* **Age Factor**: Younger employees (Age 18-30) show a significantly higher tendency to switch companies compared to established professionals.
+
+---
 
 ## 🌐 Live Deployments
 * **Primary (Render):** [https://employee-xcjt.onrender.com/](https://employee-xcjt.onrender.com/)
