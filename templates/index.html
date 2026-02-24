@@ -10,32 +10,25 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; color: white; margin: 0; overflow-x: hidden; }
-        
         .view { display: none; min-height: 100vh; width: 100vw; }
         .view.active { display: flex; flex-direction: column; animation: fadeIn 0.4s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
         .custom-scroll::-webkit-scrollbar { width: 8px; }
         .custom-scroll::-webkit-scrollbar-track { background: #0f172a; }
         .custom-scroll::-webkit-scrollbar-thumb { background: #6366f1; border-radius: 10px; }
-
         .glass-container { background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(20px); }
         .input-box { background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 10px; width: 100%; color: white; outline: none; transition: 0.3s; }
         .input-box:focus { border-color: #6366f1; background: #0f172a; }
-        .input-error { border-color: #ef4444 !important; }
+        .input-error { border: 2px solid #ef4444 !important; background: rgba(239, 68, 68, 0.1) !important; }
     </style>
 </head>
 <body>
 
     <section id="welcomePage" class="view active items-center justify-center bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-900/40 via-slate-950 to-slate-950">
         <div class="text-center space-y-8 p-6">
-            <h1 class="text-7xl md:text-9xl font-black tracking-tighter uppercase leading-none">
-                ATTRITION<br><span class="text-indigo-500">DECODER</span>
-            </h1>
+            <h1 class="text-7xl md:text-9xl font-black tracking-tighter uppercase leading-none">ATTRITION<br><span class="text-indigo-500">DECODER</span></h1>
             <p class="text-slate-400 text-xl max-w-2xl mx-auto">AI Diagnostic analyzing your specific 27 behavioral markers.</p>
-            <button onclick="changeView('entryPage')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-black px-12 py-5 rounded-2xl text-xl transition-all hover:scale-105">
-                BEGIN SYSTEM SCAN
-            </button>
+            <button onclick="changeView('entryPage')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-black px-12 py-5 rounded-2xl text-xl transition-all hover:scale-105">BEGIN SYSTEM SCAN</button>
         </div>
     </section>
 
@@ -47,138 +40,41 @@
             </div>
 
             <form id="fullDataForm" class="flex-grow overflow-y-auto custom-scroll p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Age</label>
-                    <input type="number" name="Age" class="input-box" required>
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Distance From Home</label>
-                    <input type="number" name="DistanceFromHome" class="input-box" required>
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Monthly Income ($)</label>
-                    <input type="number" name="MonthlyIncome" class="input-box" required>
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Total Working Years</label>
-                    <input type="number" name="TotalWorkingYears" class="input-box" required>
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Years At Company</label>
-                    <input type="number" name="YearsAtCompany" class="input-box" required>
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Years In Current Role</label>
-                    <input type="number" name="YearsInCurrentRole" class="input-box" required>
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Years Since Last Promotion</label>
-                    <input type="number" name="YearsSinceLastPromotion" class="input-box" required>
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Years With Curr Manager</label>
-                    <input type="number" name="YearsWithCurrManager" class="input-box" required>
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Percent Salary Hike</label>
-                    <input type="number" name="PercentSalaryHike" class="input-box" required>
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Num Companies Worked</label>
-                    <input type="number" name="NumCompaniesWorked" class="input-box" required>
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Training Times Last Year</label>
-                    <input type="number" name="TrainingTimesLastYear" class="input-box" required>
-                </div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Age</label><input type="number" name="Age" class="input-box" required></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Distance From Home</label><input type="number" name="DistanceFromHome" class="input-box" required></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Monthly Income ($)</label><input type="number" name="MonthlyIncome" class="input-box" required></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Total Working Years</label><input type="number" name="TotalWorkingYears" class="input-box" required></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Years At Company</label><input type="number" name="YearsAtCompany" class="input-box" required></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Years In Current Role</label><input type="number" name="YearsInCurrentRole" class="input-box" required></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Years Since Last Promotion</label><input type="number" name="YearsSinceLastPromotion" class="input-box" required></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Years With Curr Manager</label><input type="number" name="YearsWithCurrManager" class="input-box" required></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Percent Salary Hike</label><input type="number" name="PercentSalaryHike" class="input-box" required></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Num Companies Worked</label><input type="number" name="NumCompaniesWorked" class="input-box" required></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Training Times Last Year</label><input type="number" name="TrainingTimesLastYear" class="input-box" required></div>
 
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Gender</label>
-                    <select name="Gender" class="input-box">
-                        <option value="Male">Male</option><option value="Female">Female</option>
-                    </select>
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Business Travel</label>
-                    <select name="BusinessTravel" class="input-box">
-                        <option value="Travel_Rarely">Travel Rarely</option>
-                        <option value="Travel_Frequently">Travel Frequently</option>
-                        <option value="Non-Travel">Non-Travel</option>
-                    </select>
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Overtime</label>
-                    <select name="OverTime" class="input-box">
-                        <option value="No">No</option><option value="Yes">Yes</option>
-                    </select>
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Department</label>
-                    <select name="Department" class="input-box">
-                        <option>Research & Development</option><option>Sales</option><option>Human Resources</option>
-                    </select>
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Job Role</label>
-                    <select name="JobRole" class="input-box">
-                        <option>Research Scientist</option><option>Laboratory Technician</option><option>Sales Executive</option><option>Manufacturing Director</option><option>Healthcare Representative</option><option>Manager</option><option>Sales Representative</option><option>Research Director</option><option>Human Resources</option>
-                    </select>
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Marital Status</label>
-                    <select name="MaritalStatus" class="input-box">
-                        <option>Married</option><option>Single</option><option>Divorced</option>
-                    </select>
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Education Field</label>
-                    <select name="EducationField" class="input-box">
-                        <option>Life Sciences</option><option>Medical</option><option>Marketing</option><option>Technical Degree</option><option>Other</option><option>Human Resources</option>
-                    </select>
-                </div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Gender</label><select name="Gender" class="input-box"><option>Male</option><option>Female</option></select></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Business Travel</label><select name="BusinessTravel" class="input-box"><option value="Travel_Rarely">Travel Rarely</option><option value="Travel_Frequently">Travel Frequently</option><option value="Non-Travel">Non-Travel</option></select></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Overtime</label><select name="OverTime" class="input-box"><option>No</option><option>Yes</option></select></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Department</label><select name="Department" class="input-box"><option>Research & Development</option><option>Sales</option><option>Human Resources</option></select></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Job Role</label><select name="JobRole" class="input-box"><option>Research Scientist</option><option>Laboratory Technician</option><option>Sales Executive</option><option>Manufacturing Director</option><option>Healthcare Representative</option><option>Manager</option><option>Sales Representative</option><option>Research Director</option><option>Human Resources</option></select></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Marital Status</label><select name="MaritalStatus" class="input-box"><option>Married</option><option>Single</option><option>Divorced</option></select></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Education Field</label><select name="EducationField" class="input-box"><option>Life Sciences</option><option>Medical</option><option>Marketing</option><option>Technical Degree</option><option>Other</option><option>Human Resources</option></select></div>
 
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Job Satisfaction (1-4)</label>
-                    <input type="number" name="JobSatisfaction" min="1" max="4" value="3" class="input-box">
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Environment Satisfaction</label>
-                    <input type="number" name="EnvironmentSatisfaction" min="1" max="4" value="3" class="input-box">
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Job Involvement</label>
-                    <input type="number" name="JobInvolvement" min="1" max="4" value="3" class="input-box">
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Relationship Satisfaction</label>
-                    <input type="number" name="RelationshipSatisfaction" min="1" max="4" value="3" class="input-box">
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Work Life Balance</label>
-                    <input type="number" name="WorkLifeBalance" min="1" max="4" value="3" class="input-box">
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Performance Rating</label>
-                    <input type="number" name="PerformanceRating" min="1" max="4" value="3" class="input-box">
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Job Level (1-5)</label>
-                    <input type="number" name="JobLevel" min="1" max="5" value="1" class="input-box">
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Education (1-5)</label>
-                    <input type="number" name="Education" min="1" max="5" value="3" class="input-box">
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Stock Option Level (0-3)</label>
-                    <input type="number" name="StockOptionLevel" min="0" max="3" value="0" class="input-box">
-                </div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Job Satisfaction</label><select name="JobSatisfaction" class="input-box"><option value="1">1 - Low</option><option value="2">2 - Medium</option><option value="3" selected>3 - High</option><option value="4">4 - Very High</option></select></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Environment Satisfaction</label><select name="EnvironmentSatisfaction" class="input-box"><option value="1">1 - Low</option><option value="2">2 - Medium</option><option value="3" selected>3 - High</option><option value="4">4 - Very High</option></select></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Job Involvement</label><select name="JobInvolvement" class="input-box"><option value="1">1 - Low</option><option value="2">2 - Medium</option><option value="3" selected>3 - High</option><option value="4">4 - Very High</option></select></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Relationship Satisfaction</label><select name="RelationshipSatisfaction" class="input-box"><option value="1">1 - Low</option><option value="2">2 - Medium</option><option value="3" selected>3 - High</option><option value="4">4 - Very High</option></select></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Work Life Balance</label><select name="WorkLifeBalance" class="input-box"><option value="1">1 - Bad</option><option value="2">2 - Good</option><option value="3" selected>3 - Better</option><option value="4">4 - Best</option></select></div>
+                
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Performance Rating</label><select name="PerformanceRating" class="input-box"><option value="1">1 - Needs Improvement</option><option value="2">2 - Satisfactory</option><option value="3" selected>3 - Excellent</option><option value="4">4 - Outstanding</option></select></div>
+
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Education Level</label><select name="Education" class="input-box" required><option>Below College</option><option>College</option><option selected>Bachelor</option><option>Master</option><option>Doctor</option></select></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Job Level</label><select name="JobLevel" class="input-box" required><option>Entry Level</option><option>Intermediate / Junior</option><option>Mid-Level / Specialist</option><option>Senior Management</option><option>Executive / VP</option></select></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Stock Option Level (0-3)</label><input type="number" name="StockOptionLevel" min="0" max="3" value="0" class="input-box"></div>
             </form>
 
             <div class="p-6 bg-slate-900 border-t border-white/5 flex justify-end">
-                <button onclick="runAnalysis()" class="bg-indigo-600 hover:bg-indigo-500 px-10 py-4 rounded-xl font-bold transition-all shadow-lg shadow-indigo-600/20">
-                    ANALYZE ATTRITION
-                </button>
+                <button onclick="runAnalysis()" class="bg-indigo-600 hover:bg-indigo-500 px-10 py-4 rounded-xl font-bold transition-all shadow-lg shadow-indigo-600/20">ANALYZE ATTRITION</button>
             </div>
         </div>
     </section>
@@ -186,85 +82,74 @@
     <section id="analyzePage" class="view bg-slate-950 items-center justify-center p-6">
         <div class="max-w-4xl w-full space-y-8 text-center">
             <h2 class="text-5xl font-black italic uppercase">Scan <span class="text-indigo-500">Complete</span></h2>
-            
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="glass-container p-10 rounded-[3rem]">
                     <div class="text-sm font-bold text-slate-500 uppercase mb-4 tracking-widest">Risk Probability</div>
                     <div id="percentageDisplay" class="text-8xl font-black text-indigo-500">0%</div>
                     <div id="riskText" class="text-xl font-bold mt-4 uppercase">Low Risk</div>
                 </div>
-                <div class="glass-container p-10 rounded-[3rem] h-80">
-                    <canvas id="attritionChart"></canvas>
-                </div>
+                <div class="glass-container p-10 rounded-[3rem] h-80"><canvas id="attritionChart"></canvas></div>
             </div>
-            
-            <button onclick="location.reload()" class="text-slate-500 hover:text-white transition font-bold uppercase tracking-widest">Run New Diagnostic</button>
+            <div class="space-y-4">
+                <button onclick="downloadCSV()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-12 py-4 rounded-2xl text-lg transition-all hover:scale-105 shadow-lg shadow-emerald-600/20"><i class="fas fa-file-csv mr-2"></i> DOWNLOAD REPORT (CSV)</button>
+                <button onclick="location.reload()" class="block mx-auto text-slate-500 hover:text-white transition font-bold uppercase tracking-widest text-sm mt-4">Run New Diagnostic</button>
+            </div>
         </div>
     </section>
 
     <script>
-        function changeView(id) {
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-        }
-
+        let lastAnalysisData = null;
+        function changeView(id) { document.querySelectorAll('.view').forEach(v => v.classList.remove('active')); document.getElementById(id).classList.add('active'); }
         async function runAnalysis() {
             const form = document.getElementById('fullDataForm');
-            const status = document.getElementById('loadingStatus');
-            
-            // Basic validation check
-            if(!form.checkValidity()) {
-                alert("Please fill out all fields.");
-                return;
-            }
-
-            status.classList.remove('hidden');
+            const requiredFields = form.querySelectorAll('[required]');
+            let isValid = true;
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) { field.classList.add('input-error'); isValid = false; }
+                else { field.classList.remove('input-error'); }
+            });
+            if (!isValid) { alert("Please fill in all highlighted fields."); return; }
+            document.getElementById('loadingStatus').classList.remove('hidden');
             const formData = new FormData(form);
             const jsonData = Object.fromEntries(formData.entries());
-
             try {
-                // TALKS TO YOUR FLASK APP.PY
-                const response = await fetch('/predict', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(jsonData)
-                });
-
+                const response = await fetch('/predict', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(jsonData) });
                 const result = await response.json();
-
                 if (result.status === "Success") {
-                    const risk = parseFloat(result.risk_percentage);
-                    document.getElementById('percentageDisplay').innerText = risk + "%";
-                    document.getElementById('riskText').innerText = result.prediction;
-                    document.getElementById('riskText').style.color = risk > 50 ? "#ef4444" : "#10b981";
-                    
+                    lastAnalysisData = { ...jsonData, Prediction: result.prediction, Score: result.risk_percentage + "%" };
+                    const score = parseFloat(result.risk_percentage);
+                    document.getElementById('percentageDisplay').innerText = score + "%";
+                    const riskText = document.getElementById('riskText');
+                    riskText.innerText = result.prediction;
+                    if (score < 40) riskText.style.color = "#10b981";
+                    else if (score <= 80) riskText.style.color = "#f59e0b";
+                    else riskText.style.color = "#ef4444";
                     changeView('analyzePage');
-                    renderGraph(risk);
-                } else {
-                    alert("Error: " + result.error);
-                }
-            } catch (err) {
-                alert("Connection failed. Check if your Flask server is running!");
-            } finally {
-                status.classList.add('hidden');
-            }
+                    renderGraph(score);
+                } else { alert("Error: " + result.error); }
+            } catch (err) { alert("Connection failed."); }
+            finally { document.getElementById('loadingStatus').classList.add('hidden'); }
         }
-
         function renderGraph(score) {
             const ctx = document.getElementById('attritionChart');
             if (window.myChart) window.myChart.destroy();
             window.myChart = new Chart(ctx, {
                 type: 'doughnut',
-                data: {
-                    labels: ['Risk', 'Safety'],
-                    datasets: [{
-                        data: [score, 100 - score],
-                        backgroundColor: ['#6366f1', '#1e293b'],
-                        borderWidth: 0
-                    }]
-                },
+                data: { labels: ['Risk', 'Safety'], datasets: [{ data: [score, 100 - score], backgroundColor: [score < 40 ? '#10b981' : score <= 80 ? '#f59e0b' : '#ef4444', '#1e293b'], borderWidth: 0 }] },
                 options: { cutout: '80%', plugins: { legend: { display: false } } }
             });
+        }
+        function downloadCSV() {
+            if (!lastAnalysisData) return;
+            const headers = Object.keys(lastAnalysisData).join(",");
+            const values = Object.values(lastAnalysisData).map(v => `"${v}"`).join(",");
+            const csvContent = "data:text/csv;charset=utf-8," + headers + "\n" + values;
+            const link = document.createElement("a");
+            link.setAttribute("href", encodeURI(csvContent));
+            link.setAttribute("download", `Attrition_Report_Age_${lastAnalysisData.Age}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
     </script>
 </body>
