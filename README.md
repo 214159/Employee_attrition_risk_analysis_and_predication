@@ -1,9 +1,16 @@
-# 🚀 AI Employee Attrition Predictor
+# 🚀 Employee_attrition_risk_analysis_and_predication
 
-[![Render Deployment](https://img.shields.io/badge/Render-Live_Demo-00d1b2?style=for-the-badge&logo=render&logoColor=white)](https://employee-xcjt.onrender.com/)
+[![Render Deployment](https://img.shields.io/badge/Render-Live_Demo-00d1b2?style=for-the-badge&logo=render&logoColor=white)](https://employee-xcjt.onrender.com/https://employee-attrition-risk-analysis-and-lyd4.onrender.com)
 [![Hugging Face Space](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Space-blue?style=for-the-badge)](https://huggingface.co/spaces/PayalGaikwad/Employee_Risk_Analysis)
 
 An interactive Machine Learning web application designed to identify high-risk employees using **27 key behavioral and professional markers.**
+
+---
+
+## 🖥️ System Interface
+<img width="1919" height="907" alt="image" src="https://github.com/user-attachments/assets/d8928243-d7ae-460f-b1df-02b4e6a9d93c" />
+
+*The high-tech interface features a glassmorphism design with real-time risk calculation.*
 
 ---
 
@@ -13,51 +20,55 @@ An interactive Machine Learning web application designed to identify high-risk e
 
 ---
 
-## 📊 Dataset Insights
-The engine is trained on a dataset of **1,470 records** with an **Attrition Rate of 16.1%**.
+## 📊 Diagnostic Engine Logic
+The engine analyses employee stability through three distinct lenses, using a **Triple-Tier Risk Assessment** model:
 
-### **Critical Markers Analyzed:**
-* **Work-Life Balance**: OverTime and DistanceFromHome.
-* **Economic Factors**: MonthlyIncome and PercentSalaryHike.
-* **Loyalty Metrics**: YearsAtCompany and YearsWithCurrManager.
+### **1. Risk Categorization**
+* 🟢 **Low Risk (<40%)**: Stable employee profile.
+* 🟠 **Moderate Risk (40% - 80%)**: Warning phase; requires engagement.
+* 🔴 **High Risk (>80%)**: Critical flight risk; immediate intervention needed.
 
----
+<img width="1918" height="915" alt="image" src="https://github.com/user-attachments/assets/01d7df33-3b64-4f5f-b3ff-8e9720dde391" />
 
-## ⚙️ Technical Implementation
-The system ensures high accuracy by strictly managing data types and feature alignment:
-
-1. **Input Handling**: The frontend captures 27 features. 
-2. **Type Casting**: The backend automatically converts string-based numeric inputs (often received as `object` types) into `int64` to prevent model runtime errors.
-3. **Encoding Pipeline**: 
-    * Binary Mapping for `Gender` and `OverTime`.
-    * One-Hot Encoding for categorical fields like `JobRole` and `Department`.
-
-
+### **2. Feature Mapping**
+To ensure 100% accuracy, the system uses a custom **Text-to-Numeric Pipeline** for:
+* **Education & Job Levels**: Mapped from professional titles to 1-5 scales.
+* **Satisfaction Ratings**: Converted from text dropdowns to 1-4 ordinals.
 
 ---
 
-## 🏆 Model Performance
-We prioritize **Recall** to ensure that employees likely to leave are not missed by the system.
+## 🏆 Why XGBoost?
+After rigorous testing across multiple algorithms, **XGBoost** was selected as the production model.
 
-| Model | Precision (Attrition) | Recall (Attrition) | F1-Score |
+**The Decision Factor:**
+While Random Forest showed high precision, it lacked the ability to catch all potential "leavers" (Low Recall). **XGBoost provided the best balance of Precision and Recall**, ensuring the model doesn't just predict accurately, but actually captures the highest number of high-risk employees before they resign.
+
+| Model | Precision | Recall | F1-Score |
 | :--- | :---: | :---: | :---: |
-| **XGBoost** | **0.50** | **0.41** | **0.46** |
+| **XGBoost (Selected)** | **0.50** | **0.41** | **0.46** |
 | **Logistic Regression** | 0.50 | 0.36 | 0.42 |
 | **Random Forest** | 1.00 | 0.13 | 0.23 |
 
 ---
 
-## 🛠️ Tech Stack
-* **Backend**: Python (Flask, Gunicorn)
-* **Frontend**: HTML5, Tailwind CSS, Chart.js
-* **ML Library**: Scikit-learn, XGBoost, Pandas
-* **Hosting**: Render & Hugging Face Spaces
-
+## ⚙️ Technical Implementation
+1. **Intelligent UI**: Built with **Red-Box Validation**—empty fields turn red immediately to prevent partial data submission.
+2. **Robust Backend**: Data types are force-cast to `int64` to prevent model runtime errors.
+3. **Encoding**: Integrated One-Hot Encoding for categorical stability.
+---
+* **Frontend UI/UX & System Integration**: Developed by **Gemini (AI)**
+* **Tech Stack**: Python, Flask, XGBoost, Tailwind CSS, Chart.js
 ---
 
-## 💡 Recommendations
-* **Threshold Tuning**: Managers can adjust the risk threshold to be more sensitive to high-value talent.
-* **Intervention**: High-risk scores (e.g., >70%) should trigger immediate engagement interviews or salary reviews.
+## 🏁 Conclusion
+The **AI Employee Attrition Predictor** successfully bridges the gap between raw HR data and proactive talent management. By utilizing the XGBoost model's superior recall capabilities, organizations can move from reactive hiring to proactive retention, saving significant costs associated with employee turnover.
 
 ---
-**Developed by Payal Gaikwad**
+## 🔮 Future Roadmap
+To further enhance the **Neural Attrition Decoder**, the following features are planned:
+
+* **Prescriptive Analytics**: Moving beyond "who will leave" to "what specific action will make them stay."
+* **Stay-Interview Automation**: Triggering automated calendar invites for HR when an employee hits the 'Moderate Risk' threshold.
+* **Sentiment Analysis**: Integrating NLP to analyze employee feedback from internal surveys.
+* **Cloud Scalability**: Migrating to AWS/Azure for real-time processing of large-scale enterprise data.
+* **Longitudinal Tracking**: Analyzing how an employee's risk score changes month-over-month to identify seasonal attrition trends.
