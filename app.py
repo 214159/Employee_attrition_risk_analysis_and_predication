@@ -4,15 +4,23 @@ import pickle
 import os
 import shap
 import google.generativeai as genai
+import re 
 from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 
 # --- 1. CONFIGURE GEMINI AI ---
-# It's best practice to use environment variables for keys
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "YOUR_GEMINI_API_KEY") 
 genai.configure(api_key=GEMINI_API_KEY)
 gemini_model = genai.GenerativeModel('gemini-1.5-flash')
+
+# --- Helper function to fix the "joined words" issue ---
+def clean_feature_name(name):
+    # 1. Replace underscores with spaces
+    name = name.replace('_', ' ')
+    # 2. Add spaces before capital letters (JobSatisfaction -> Job Satisfaction)
+    name = re.sub(r'([a-z])([A-Z])', r'\1 \2', name)
+    return name
 
 # --- 2. LOAD ASSETS ---
 base_path = os.path.dirname(os.path.abspath(__file__))
@@ -25,7 +33,6 @@ try:
     with open(ohe_path, "rb") as f:
         OneHot_model = pickle.load(f)
     
-    # Initialize SHAP Explainer
     explainer = shap.TreeExplainer(loaded_model)
     print("✅ Files and SHAP Explainer loaded successfully.")
 except Exception as e:
@@ -33,9 +40,6 @@ except Exception as e:
 
 # --- 3. GEMINI REAL-TIME SUGGESTION ENGINE ---
 def get_gemini_suggestions(risk_score, top_factors_list):
-    """
-    Sends the SHAP factors to Gemini to get tailored HR solutions.
-    """
     factors_str = ", ".join([f"{f['feature']}" for f in top_factors_list])
     
     prompt = f"""
@@ -49,7 +53,6 @@ def get_gemini_suggestions(risk_score, top_factors_list):
     
     try:
         response = gemini_model.generate_content(prompt)
-        # Split text into a list and clean up bullets/empty lines
         suggestions = [line.strip().replace('* ', '') for line in response.text.strip().split('\n') if line.strip()]
         return suggestions[:5]
     except Exception as e:
@@ -117,28 +120,23 @@ def predict():
 
         # --- 5. SHAP EXPLANATION (Top 5 Factors) ---
         shap_values = explainer.shap_values(user_final)
-        
-        if isinstance(shap_values, list):
-            vals = shap_values[1][0]
-        else:
-            vals = shap_values[0]
+        if isinstance(shap_values, list): vals = shap_values[1][0]
+        else: vals = shap_values[0]
 
         feature_importance = pd.Series(vals, index=user_final.columns)
         top_factors_series = feature_importance.sort_values(ascending=False).head(5)
 
-        # Prepare factors for Gemini
+        # Clean features for Gemini
         top_factors_list = []
         for feature, val in top_factors_series.items():
             top_factors_list.append({
-                "feature": feature,
+                "feature": clean_feature_name(feature), # Using Regex cleaner here
                 "impact_score": round(float(val), 4)
             })
 
         # --- 6. GET AI RECOMMENDATIONS ---
         ai_suggestions = get_gemini_suggestions(risk_score, top_factors_list)
 
-        # Combine factors with their respective AI suggestions
-        # We zip them so the frontend gets a pair of Factor + Solution
         final_insights = []
         for i in range(len(top_factors_list)):
             final_insights.append({
