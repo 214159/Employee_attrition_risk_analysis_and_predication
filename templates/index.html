@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neural Attrition Engine | Full 27-Point Scan</title>
+    <title>Neural Attrition Engine | Gemini AI Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -36,7 +36,7 @@
         <div class="max-w-6xl mx-auto w-full glass-container rounded-[2rem] flex flex-col h-full overflow-hidden">
             <div class="p-6 border-b border-white/5 bg-white/5 flex justify-between items-center">
                 <h2 class="text-xl font-bold uppercase italic tracking-widest text-indigo-400">Parameter Ingestion (27 Features)</h2>
-                <div id="loadingStatus" class="hidden text-indigo-400 animate-pulse font-bold">ANALYZING...</div>
+                <div id="loadingStatus" class="hidden text-indigo-400 animate-pulse font-bold">ANALYZING VIA GEMINI...</div>
             </div>
 
             <form id="fullDataForm" class="flex-grow overflow-y-auto custom-scroll p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -51,6 +51,7 @@
                 <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Percent Salary Hike</label><input type="number" name="PercentSalaryHike" class="input-box" required></div>
                 <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Num Companies Worked</label><input type="number" name="NumCompaniesWorked" class="input-box" required></div>
                 <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Training Times Last Year</label><input type="number" name="TrainingTimesLastYear" class="input-box" required></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Stock Option Level (0-3)</label><input type="number" name="StockOptionLevel" min="0" max="3" value="0" class="input-box"></div>
 
                 <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Gender</label><select name="Gender" class="input-box"><option>Male</option><option>Female</option></select></div>
                 <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Business Travel</label><select name="BusinessTravel" class="input-box"><option value="Travel_Rarely">Travel Rarely</option><option value="Travel_Frequently">Travel Frequently</option><option value="Non-Travel">Non-Travel</option></select></div>
@@ -59,86 +60,150 @@
                 <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Job Role</label><select name="JobRole" class="input-box"><option>Research Scientist</option><option>Laboratory Technician</option><option>Sales Executive</option><option>Manufacturing Director</option><option>Healthcare Representative</option><option>Manager</option><option>Sales Representative</option><option>Research Director</option><option>Human Resources</option></select></div>
                 <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Marital Status</label><select name="MaritalStatus" class="input-box"><option>Married</option><option>Single</option><option>Divorced</option></select></div>
                 <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Education Field</label><select name="EducationField" class="input-box"><option>Life Sciences</option><option>Medical</option><option>Marketing</option><option>Technical Degree</option><option>Other</option><option>Human Resources</option></select></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Education Level</label><select name="Education" class="input-box" required><option>Below College</option><option>College</option><option selected>Bachelor</option><option>Master</option><option>Doctor</option></select></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Job Level</label><select name="JobLevel" class="input-box" required><option>Entry Level</option><option>Intermediate / Junior</option><option>Mid-Level / Specialist</option><option>Senior Management</option><option>Executive / VP</option></select></div>
 
                 <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Job Satisfaction</label><select name="JobSatisfaction" class="input-box"><option value="1">1 - Low</option><option value="2">2 - Medium</option><option value="3" selected>3 - High</option><option value="4">4 - Very High</option></select></div>
                 <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Environment Satisfaction</label><select name="EnvironmentSatisfaction" class="input-box"><option value="1">1 - Low</option><option value="2">2 - Medium</option><option value="3" selected>3 - High</option><option value="4">4 - Very High</option></select></div>
                 <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Job Involvement</label><select name="JobInvolvement" class="input-box"><option value="1">1 - Low</option><option value="2">2 - Medium</option><option value="3" selected>3 - High</option><option value="4">4 - Very High</option></select></div>
                 <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Relationship Satisfaction</label><select name="RelationshipSatisfaction" class="input-box"><option value="1">1 - Low</option><option value="2">2 - Medium</option><option value="3" selected>3 - High</option><option value="4">4 - Very High</option></select></div>
                 <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Work Life Balance</label><select name="WorkLifeBalance" class="input-box"><option value="1">1 - Bad</option><option value="2">2 - Good</option><option value="3" selected>3 - Better</option><option value="4">4 - Best</option></select></div>
-                
                 <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Performance Rating</label><select name="PerformanceRating" class="input-box"><option value="1">1 - Needs Improvement</option><option value="2">2 - Satisfactory</option><option value="3" selected>3 - Excellent</option><option value="4">4 - Outstanding</option></select></div>
-
-                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Education Level</label><select name="Education" class="input-box" required><option>Below College</option><option>College</option><option selected>Bachelor</option><option>Master</option><option>Doctor</option></select></div>
-                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Job Level</label><select name="JobLevel" class="input-box" required><option>Entry Level</option><option>Intermediate / Junior</option><option>Mid-Level / Specialist</option><option>Senior Management</option><option>Executive / VP</option></select></div>
-                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Stock Option Level (0-3)</label><input type="number" name="StockOptionLevel" min="0" max="3" value="0" class="input-box"></div>
             </form>
 
             <div class="p-6 bg-slate-900 border-t border-white/5 flex justify-end">
-                <button onclick="runAnalysis()" class="bg-indigo-600 hover:bg-indigo-500 px-10 py-4 rounded-xl font-bold transition-all shadow-lg shadow-indigo-600/20">ANALYZE ATTRITION</button>
+                <button onclick="runAnalysis()" class="bg-indigo-600 hover:bg-indigo-500 px-10 py-4 rounded-xl font-bold transition-all shadow-lg shadow-indigo-600/20 uppercase tracking-widest">Run Diagnostic</button>
             </div>
         </div>
     </section>
 
-    <section id="analyzePage" class="view bg-slate-950 items-center justify-center p-6">
-        <div class="max-w-4xl w-full space-y-8 text-center">
-            <h2 class="text-5xl font-black italic uppercase">Scan <span class="text-indigo-500">Complete</span></h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="glass-container p-10 rounded-[3rem]">
-                    <div class="text-sm font-bold text-slate-500 uppercase mb-4 tracking-widest">Risk Probability</div>
-                    <div id="percentageDisplay" class="text-8xl font-black text-indigo-500">0%</div>
+    <section id="analyzePage" class="view bg-slate-950 p-6 overflow-y-auto custom-scroll">
+        <div class="max-w-6xl mx-auto w-full space-y-8">
+            <div class="text-center">
+                <h2 class="text-5xl font-black italic uppercase">Scan <span class="text-indigo-500">Complete</span></h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="glass-container p-8 rounded-[2.5rem] text-center flex flex-col justify-center items-center">
+                    <div class="text-xs font-bold text-slate-500 uppercase mb-2 tracking-widest">Risk Probability</div>
+                    <div class="relative w-48 h-48">
+                        <canvas id="attritionChart"></canvas>
+                        <div id="percentageDisplay" class="absolute inset-0 flex items-center justify-center text-4xl font-black text-indigo-500">0%</div>
+                    </div>
                     <div id="riskText" class="text-xl font-bold mt-4 uppercase">Low Risk</div>
                 </div>
-                <div class="glass-container p-10 rounded-[3rem] h-80"><canvas id="attritionChart"></canvas></div>
+
+                <div class="lg:col-span-2 glass-container p-8 rounded-[2.5rem]">
+                    <div class="text-xs font-bold text-slate-500 uppercase mb-4 tracking-widest text-indigo-400">Top 5 Attrition Drivers (SHAP Analysis)</div>
+                    <div class="h-64">
+                        <canvas id="shapChart"></canvas>
+                    </div>
+                </div>
             </div>
-            <div class="space-y-4">
-                <button onclick="downloadCSV()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-12 py-4 rounded-2xl text-lg transition-all hover:scale-105 shadow-lg shadow-emerald-600/20"><i class="fas fa-file-csv mr-2"></i> DOWNLOAD REPORT (CSV)</button>
-                <button onclick="location.reload()" class="block mx-auto text-slate-500 hover:text-white transition font-bold uppercase tracking-widest text-sm mt-4">Run New Diagnostic</button>
+
+            <div class="glass-container p-8 rounded-[2.5rem]">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold uppercase italic tracking-widest text-indigo-400">
+                        <i class="fas fa-robot mr-2"></i> Gemini AI Strategic Recommendations
+                    </h3>
+                </div>
+                <div id="suggestionsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+                    </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-center gap-4 pb-10">
+                <button onclick="downloadCSV()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-10 py-4 rounded-2xl transition-all shadow-lg shadow-emerald-600/20"><i class="fas fa-file-csv mr-2"></i> DOWNLOAD CSV</button>
+                <button onclick="location.reload()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold px-10 py-4 rounded-2xl transition-all uppercase tracking-widest">Reset System</button>
             </div>
         </div>
     </section>
 
     <script>
         let lastAnalysisData = null;
-        function changeView(id) { document.querySelectorAll('.view').forEach(v => v.classList.remove('active')); document.getElementById(id).classList.add('active'); }
+
+        function changeView(id) { 
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active')); 
+            document.getElementById(id).classList.add('active'); 
+        }
+
         async function runAnalysis() {
             const form = document.getElementById('fullDataForm');
             const requiredFields = form.querySelectorAll('[required]');
             let isValid = true;
+
             requiredFields.forEach(field => {
                 if (!field.value.trim()) { field.classList.add('input-error'); isValid = false; }
                 else { field.classList.remove('input-error'); }
             });
-            if (!isValid) { alert("Please fill in all highlighted fields."); return; }
+
+            if (!isValid) { alert("Diagnostic requires all parameters."); return; }
+
             document.getElementById('loadingStatus').classList.remove('hidden');
             const formData = new FormData(form);
             const jsonData = Object.fromEntries(formData.entries());
+
             try {
                 const response = await fetch('/predict', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(jsonData) });
                 const result = await response.json();
+
                 if (result.status === "Success") {
                     lastAnalysisData = { ...jsonData, Prediction: result.prediction, Score: result.risk_percentage + "%" };
+                    
                     const score = parseFloat(result.risk_percentage);
                     document.getElementById('percentageDisplay').innerText = score + "%";
                     const riskText = document.getElementById('riskText');
                     riskText.innerText = result.prediction;
+
                     if (score < 40) riskText.style.color = "#10b981";
                     else if (score <= 80) riskText.style.color = "#f59e0b";
                     else riskText.style.color = "#ef4444";
+
                     changeView('analyzePage');
-                    renderGraph(score);
+                    renderMainDoughnut(score);
+                    renderShapChart(result.top_factors);
+
+                    // Inject Gemini suggestions
+                    const sugContainer = document.getElementById('suggestionsContainer');
+                    sugContainer.innerHTML = ''; 
+                    result.top_factors.forEach(factor => {
+                        sugContainer.innerHTML += `
+                            <div class="bg-indigo-500/5 border border-white/5 p-5 rounded-2xl transition-all hover:bg-indigo-500/10">
+                                <div class="flex items-center space-x-2 mb-2">
+                                    <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+                                    <div class="text-indigo-400 font-black text-xs uppercase tracking-widest">${factor.feature.replace(/_/g, ' ')}</div>
+                                </div>
+                                <p class="text-slate-300 text-sm leading-relaxed italic">"${factor.suggestion}"</p>
+                            </div>
+                        `;
+                    });
                 } else { alert("Error: " + result.error); }
             } catch (err) { alert("Connection failed."); }
             finally { document.getElementById('loadingStatus').classList.add('hidden'); }
         }
-        function renderGraph(score) {
+
+        function renderMainDoughnut(score) {
             const ctx = document.getElementById('attritionChart');
             if (window.myChart) window.myChart.destroy();
             window.myChart = new Chart(ctx, {
                 type: 'doughnut',
-                data: { labels: ['Risk', 'Safety'], datasets: [{ data: [score, 100 - score], backgroundColor: [score < 40 ? '#10b981' : score <= 80 ? '#f59e0b' : '#ef4444', '#1e293b'], borderWidth: 0 }] },
-                options: { cutout: '80%', plugins: { legend: { display: false } } }
+                data: { labels: ['Risk', 'Safety'], datasets: [{ data: [score, 100 - score], backgroundColor: [score < 40 ? '#6366f1' : score <= 80 ? '#f59e0b' : '#ef4444', '#1e293b'], borderWidth: 0 }] },
+                options: { cutout: '85%', plugins: { legend: { display: false } } }
             });
         }
+
+        function renderShapChart(factors) {
+            const ctx = document.getElementById('shapChart');
+            if (window.myShapChart) window.myShapChart.destroy();
+            window.myShapChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: factors.map(f => f.feature.replace(/_/g, ' ')),
+                    datasets: [{ label: 'Impact', data: factors.map(f => f.impact_score), backgroundColor: 'rgba(99, 102, 241, 0.8)', borderRadius: 8 }]
+                },
+                options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { display: false }, y: { ticks: { color: '#ffffff', font: { weight: 'bold' } } } } }
+            });
+        }
+
         function downloadCSV() {
             if (!lastAnalysisData) return;
             const headers = Object.keys(lastAnalysisData).join(",");
@@ -146,7 +211,7 @@
             const csvContent = "data:text/csv;charset=utf-8," + headers + "\n" + values;
             const link = document.createElement("a");
             link.setAttribute("href", encodeURI(csvContent));
-            link.setAttribute("download", `Attrition_Report_Age_${lastAnalysisData.Age}.csv`);
+            link.setAttribute("download", `Attrition_Report.csv`);
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
