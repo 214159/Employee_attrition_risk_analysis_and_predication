@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neural Attrition Engine | Gemini AI Edition</title>
+    <title>Neural Attrition Engine | Full 27-Point Scan</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -16,10 +16,19 @@
         .custom-scroll::-webkit-scrollbar { width: 8px; }
         .custom-scroll::-webkit-scrollbar-track { background: #0f172a; }
         .custom-scroll::-webkit-scrollbar-thumb { background: #6366f1; border-radius: 10px; }
-        .glass-container { background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(20px); }
+        
+        /* Updated aesthetic styling for glowing effect */
+        .glass-container { 
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%); 
+            border: 1px solid rgba(99, 102, 241, 0.1); 
+            backdrop-filter: blur(20px); 
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
         .input-box { background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 10px; width: 100%; color: white; outline: none; transition: 0.3s; }
         .input-box:focus { border-color: #6366f1; background: #0f172a; }
         .input-error { border: 2px solid #ef4444 !important; background: rgba(239, 68, 68, 0.1) !important; }
+
+        #riskText { text-shadow: 0 0 15px rgba(239, 68, 68, 0.4); letter-spacing: 2px; }
     </style>
 </head>
 <body>
@@ -162,17 +171,29 @@
                     renderMainDoughnut(score);
                     renderShapChart(result.top_factors);
 
-                    // Inject Gemini suggestions
+                    // --- Updated Modern Aesthetic Injection ---
                     const sugContainer = document.getElementById('suggestionsContainer');
                     sugContainer.innerHTML = ''; 
+                    
                     result.top_factors.forEach(factor => {
                         sugContainer.innerHTML += `
-                            <div class="bg-indigo-500/5 border border-white/5 p-5 rounded-2xl transition-all hover:bg-indigo-500/10">
-                                <div class="flex items-center space-x-2 mb-2">
-                                    <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
-                                    <div class="text-indigo-400 font-black text-xs uppercase tracking-widest">${factor.feature.replace(/_/g, ' ')}</div>
+                            <div class="group bg-slate-900/50 border border-white/5 p-5 rounded-2xl transition-all hover:border-indigo-500/50 hover:shadow-[0_0_20px_rgba(99,102,241,0.15)]">
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-8 h-8 rounded-lg bg-indigo-500/10 flex items-center justify-center">
+                                            <i class="fas fa-chart-line text-indigo-400 text-xs"></i>
+                                        </div>
+                                        <div class="text-indigo-400 font-bold text-xs uppercase tracking-widest">
+                                            ${factor.feature} 
+                                        </div>
+                                    </div>
+                                    <span class="text-[10px] text-slate-500 font-mono">Impact: +${factor.impact_score}</span>
                                 </div>
-                                <p class="text-slate-300 text-sm leading-relaxed italic">"${factor.suggestion}"</p>
+                                <div class="pl-11">
+                                    <p class="text-slate-200 text-sm leading-relaxed font-medium">
+                                        <span class="text-indigo-500/50">"</span>${factor.suggestion}<span class="text-indigo-500/50">"</span>
+                                    </p>
+                                </div>
                             </div>
                         `;
                     });
@@ -197,7 +218,7 @@
             window.myShapChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: factors.map(f => f.feature.replace(/_/g, ' ')),
+                    labels: factors.map(f => f.feature),
                     datasets: [{ label: 'Impact', data: factors.map(f => f.impact_score), backgroundColor: 'rgba(99, 102, 241, 0.8)', borderRadius: 8 }]
                 },
                 options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { display: false }, y: { ticks: { color: '#ffffff', font: { weight: 'bold' } } } } }
