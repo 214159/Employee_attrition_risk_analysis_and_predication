@@ -47,7 +47,7 @@ The engine analyses employee stability through three distinct lenses, using a **
 * 🟠 **Moderate Risk (40% - 80%)**: Warning phase; requires engagement.
 * 🔴 **High Risk (>80%)**: Critical flight risk; immediate intervention needed.
 
-<img width="1918" height="915" alt="image" src="https://github.com/user-attachments/assets/01d7df33-3b64-4f5f-b3ff-8e9720dde391" />
+<img width="1893" height="912" alt="image" src="https://github.com/user-attachments/assets/f80a4778-61a2-4684-9d89-ae534715e20e" />
 
 ### **2. Feature Mapping**
 To ensure 100% accuracy, the system uses a custom **Text-to-Numeric Pipeline** for:
