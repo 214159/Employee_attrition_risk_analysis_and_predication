@@ -65,8 +65,8 @@ While Random Forest showed high precision, it lacked the ability to catch all po
 | Model | Precision | Recall | F1-Score |
 | :--- | :---: | :---: | :---: |
 | **XGBoost (Selected)** | **0.57** | **0.53** | **0.50** |
-| **Logistic Regression** | 0.74	| 0.30 |	0.42 |
-| **Random Forest** | 1.00 | 0.13 | 0.23 |
+| **Random Forest** | 0.74	| 0.30 |	0.42 |
+| **Logistic Regression** | 0.53	| 0.53	| 0.53 |
 
 ---
 
