@@ -35,7 +35,7 @@ The model is trained on the **IBM HR Analytics Attrition Dataset**, consisting o
 ---
 
 ## 🌐 Live Deployments
-* **Primary (Render):** [https://employee-xcjt.onrender.com/](https://employee-xcjt.onrender.com/)
+* **Primary (Render):** [https://employee-xcjt.onrender.com/](https://employee-attrition-risk-analysis-and-lyd4.onrender.com/)
 
 ---
 
